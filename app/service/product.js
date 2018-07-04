@@ -7,12 +7,9 @@ module.exports = app =>{
         }
         //分页列表
         *getPageList(param){
-            const row = {
-                ...param,
-                page:param.page,
-                pageSize:param.pageSize
-            }
-
+            const row =param;
+            row.page=param.page;
+            row.pageSize=param.pageSize;
             const results = yield app.mysql.select('product',{
                // where: { status: 'draft' },
                 orders: [['create_time','desc'], ['product_id','desc']],
@@ -23,9 +20,7 @@ module.exports = app =>{
         }
         //新增
         *insert(param){
-            const row ={
-                ...param
-            }
+            const row =param;
             const results = yield app.mysql.insert('product',row);
             return results;
         }
@@ -38,9 +33,7 @@ module.exports = app =>{
         }
         //更新
         *update(param){
-            const row = {
-                ...param
-            }
+            const row = param;
             const results = yield app.mysql.update('product',row);
             return results;
         }
